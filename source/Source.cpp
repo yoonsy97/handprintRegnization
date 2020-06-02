@@ -1,8 +1,5 @@
 /**
-  @file videocapture_basic.cpp
-  @brief A very basic sample for using VideoCapture and VideoWriter
-  @author PkLab.net
-  @date Aug 24, 2016
+
 */
 #define GREEN Scalar(0,255,0)
 #define PINK Scalar(255,11,255)
@@ -62,9 +59,9 @@ void condefects(vector<Vec4i> convexityDefectsSet, vector<Point> mycontour, Mat&
 
     }
 
-    //cout << "±íÀÌ : "<< max_depth_idx <<" "<<convexityDefectsSet[max_depth_idx].val[3] / 256;
+    //cout << "ê¹Šì´ : "<< max_depth_idx <<" "<<convexityDefectsSet[max_depth_idx].val[3] / 256;
 
-    //cout << "¤±¤· :" << pair.begin()->second;
+    //cout << "ã…ã…‡ :" << pair.begin()->second;
     vector<Point> center;
     int i = 0;
     for (auto it = pair.begin(); it != pair.end(); it++,i++) {
@@ -94,12 +91,12 @@ int findMaxContourArea(vector<vector<Point>> contours) {
 }
 
 Mat findHandContour(Mat picture) {
-    Mat srcimg = picture; // ºÒ·¯¿Â picture ÇÏ³ª
-    Mat HSVImage; // InRange¿ë
-    Mat img_mask = srcimg; //Contour¿ë
+    Mat srcimg = picture; // ë¶ˆëŸ¬ì˜¨ picture í•˜ë‚˜
+    Mat HSVImage; // InRangeìš©
+    Mat img_mask = srcimg; //Contourìš©
     
                            
-    //¼Õ °ËÃâ ÁöÁ¤¿µ¿ª
+    //ì† ê²€ì¶œ ì§€ì •ì˜ì—­
     Scalar low = Scalar(0, 30, 80);
     Scalar high = Scalar(20, 255, 255);
 
@@ -107,7 +104,7 @@ Mat findHandContour(Mat picture) {
     vector<vector<Point>> contours;
     vector<Vec4i> hierarchy;
     
-    cvtColor(srcimg, HSVImage, COLOR_BGR2HSV); // 1ÆÄ¶ó¹ÌÅÍ¸¦ 2ÆÄ¶ó¹ÌÅÍ¿¡ HSV·Î º¯È¯
+    cvtColor(srcimg, HSVImage, COLOR_BGR2HSV); // 1íŒŒë¼ë¯¸í„°ë¥¼ 2íŒŒë¼ë¯¸í„°ì— HSVë¡œ ë³€í™˜
     
 
     inRange(HSVImage, low, high, HSVImage);
@@ -120,7 +117,7 @@ Mat findHandContour(Mat picture) {
         vector<vector<Point>> contours2;
         contours2.push_back(contours[max_contour]);
         vector<vector<Point>> hull(contours2.size());
-        vector<vector<int>>inthull(contours2.size()); //contoursize ²À ÇØÁà¾ßÇÔ
+        vector<vector<int>>inthull(contours2.size()); //contoursize ê¼­ í•´ì¤˜ì•¼í•¨
 
         vector<vector<Vec4i>> defects(contours2.size());
 
@@ -158,14 +155,14 @@ int main(int, char**)
     case 1:
         VideoCapture cap1(0);
         if (!cap1.isOpened())
-            cout << "Ã¹¹øÂ° Ä«¸Ş¶ó¸¦ ¿­ ¼ö ¾ø½À´Ï´Ù." << endl;
+            cout << "ì²«ë²ˆì§¸ ì¹´ë©”ë¼ë¥¼ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
         
         namedWindow("testing", 1);
         while (1) {
 
             cap1 >> srcimg;
 
-            //Mat srcimg = imread("C:\\Users\\seyoung97\\Desktop\\sample4.jpg"); // µÚ¿¡ flag°¡ 0ÀÌ¸é grayscale·Î ºÒ·¯¿È
+            //Mat srcimg = imread("C:\\Users\\seyoung97\\Desktop\\sample4.jpg"); // ë’¤ì— flagê°€ 0ì´ë©´ grayscaleë¡œ ë¶ˆëŸ¬ì˜´
             if (srcimg.empty()) {
                 return -1;
             }
@@ -174,7 +171,7 @@ int main(int, char**)
             imshow("hel", findHandContour(srcimg));
 
             // waitKey(0);
-            if (waitKey(25) >= 0) break; //esc Å° ÀÔ·Â½Ã Á¾·á
+            if (waitKey(25) >= 0) break; //esc í‚¤ ì…ë ¥ì‹œ ì¢…ë£Œ
         }
     }
      return 0;
